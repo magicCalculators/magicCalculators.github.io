@@ -62,6 +62,7 @@ buttonEl.onclick = ()=>{
     }else{
       num3 = num1 - inputText[0] * 2
     }
+    num3 = Math.abs(num3);
     for (let i = 0; i < String(num3).length; i++) {
       num4 += Number(String(num3)[i]);
     }
@@ -135,11 +136,11 @@ buttonEl.onclick = ()=>{
     itemArr[0].querySelector('span').innerHTML = res
     if(document.querySelector('.german') != undefined){
       itemArr[0].querySelectorAll('p')[1].innerHTML = "Geburtsdatum "+inputEl.value
-      itemArr[0].querySelectorAll('p')[2].innerHTML = "Zusatzzahlen "+num1+" "+num2+" "+num3+" "+num4+" ."
+      itemArr[0].querySelectorAll('p')[2].innerHTML = "Zusatzzahlen "+num1+" "+num2+" "+num3+" "+num4
       document.querySelector('.summtext').innerHTML = itemArr[2].querySelector('span').innerHTML+"/"+itemArr[6].querySelector('span').innerHTML+"/"+itemArr[10].querySelector('span').innerHTML+"/"+itemArr[3].querySelector('span').innerHTML+"/"+itemArr[7].querySelector('span').innerHTML+"/"+itemArr[11].querySelector('span').innerHTML+"/"+itemArr[4].querySelector('span').innerHTML+"/"+itemArr[8].querySelector('span').innerHTML+"/"+itemArr[12].querySelector('span').innerHTML+"/lz"+itemArr[0].querySelector('span').innerHTML
     }else{
       itemArr[0].querySelectorAll('p')[1].innerHTML = "Дата рождения "+inputEl.value
-      itemArr[0].querySelectorAll('p')[2].innerHTML = "Доп числа "+num1+" "+num2+" "+num3+" "+num4+" ."
+      itemArr[0].querySelectorAll('p')[2].innerHTML = "Доп числа "+num1+" "+num2+" "+num3+" "+num4
       document.querySelector('.summtext').innerHTML = itemArr[2].querySelector('span').innerHTML+"/"+itemArr[6].querySelector('span').innerHTML+"/"+itemArr[10].querySelector('span').innerHTML+"/"+itemArr[3].querySelector('span').innerHTML+"/"+itemArr[7].querySelector('span').innerHTML+"/"+itemArr[11].querySelector('span').innerHTML+"/"+itemArr[4].querySelector('span').innerHTML+"/"+itemArr[8].querySelector('span').innerHTML+"/"+itemArr[12].querySelector('span').innerHTML+"/чс"+itemArr[0].querySelector('span').innerHTML
     }
     toggleList()
