@@ -1,0 +1,628 @@
+<div class="wrapp">
+  <div class="input-wrapp">
+    <p>geburtsdatum eingeben</p>
+    <input class="input" type="tel">
+    <button class="button send-button">weiter</button>
+  </div>
+  <div class="list-wrapp disabled">
+    <button class="button repeat-button">Noch einmal</button>
+    <ul class="list">
+      <li class="item">
+        <p>Lebenszahl</p>
+        <span></span>
+        <p></p>
+        <p></p>
+      </li>
+      <li class="item">
+        <p>Temperament</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Charakter</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Gesundheit</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Glück</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Ziel</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Energie</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Logik</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Pflicht</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Familie</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Interesse</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Handwerk</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Gedächtnis</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Stabilität</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Selbstwert</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Profit</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Talent</p>
+        <span></span>
+      </li>
+      <li class="item">
+        <p>Geist</p>
+        <span></span>
+      </li>
+    </ul>
+    <p class="summtext"></p>
+    <input type="text" class="copytext">
+    <div class="desabled german"></div>
+  </div>
+</div>
+<script>
+  let inputWrapp = document.querySelector('.input-wrapp')
+let inputEl = inputWrapp.querySelector('.input')
+let inputPlaceholder = inputWrapp.querySelector('p')
+let buttonEl = document.querySelector('.send-button')
+let buttonRepeatEl = document.querySelector('.repeat-button')
+let listWrapp= document.querySelector('.list-wrapp')
+let month = ""
+let year = ""
+let day = ""
+
+inputEl.onfocus = ()=>{
+  inputPlaceholder.classList.add('active')
+}
+inputEl.onblur = ()=>{
+  if(inputEl.value.length == 0){
+    inputPlaceholder.classList.remove('active')
+  }else{
+
+  }
+  let inputText = inputEl.value.replace(/\D/g, "")
+  let formatedText = ''
+  if(!inputText ) return inputEl.value = ""
+  
+  day = inputText.substring(0,2)
+  month = inputText.substring(2,4)
+  year = inputText.substring(4,8)
+  if(inputText.length == 8){
+    formatedText = day+"."+month+"."+year
+  }else{
+    formatedText = day+""+month+""+year
+  }
+  inputEl.value = formatedText
+}
+inputEl.oninput = ()=>{
+  inputEl.value = inputEl.value.replace(/\D/g, "")
+  if(inputEl.value.replace(/\D/g, "").length > 8){
+    return inputEl.value = inputEl.value.replace(/\D/g, "").substring(0,8)
+  }
+} 
+buttonEl.onclick = ()=>{
+  if(inputEl.value.replace(/\D/g, "").length != 8){
+    inputEl.style.border = '3px solid #9b4040'
+  }else{
+    inputEl.style.border = ''
+    itemArr = document.querySelectorAll('.item')
+    let inputText =  inputEl.value.replace(/\D/g, "")
+    for (let i = 0; i < itemArr.length; i++) {
+      itemArr[i].querySelector('span').innerHTML = ""
+    }
+    let num1 = 0
+    let num2 = 0
+    let num3 = 0
+    let num4 = 0
+    for (let i = 0; i < inputText.length; i++) {
+      num1 += Number(inputText[i]);
+    }
+    for (let i = 0; i < String(num1).length; i++) {
+      num2 += Number(String(num1)[i]);
+    }
+    if(inputText[0] == 0){
+      num3 = num1 - inputText[1] * 2
+    }else{
+      num3 = num1 - inputText[0] * 2
+    }
+    for (let i = 0; i < String(num3).length; i++) {
+      num4 += Number(String(num3)[i]);
+    }
+    inputText = inputText+""+num1+""+num2+""+num3+""+num4
+    for (let i = 0; i < String(inputText).length; i++) {
+      if(String(inputText)[i] == 1){
+        itemArr[2].querySelector('span').innerHTML += '1' 
+      }
+      if(String(inputText)[i] == 2){
+        itemArr[6].querySelector('span').innerHTML += '2'
+      }
+      if(String(inputText)[i] == 3){
+        itemArr[10].querySelector('span').innerHTML += '3'
+      }
+      if(String(inputText)[i] == 4){
+        itemArr[3].querySelector('span').innerHTML += '4'
+      }
+      if(String(inputText)[i] == 5){
+        itemArr[7].querySelector('span').innerHTML += '5'
+      }
+      if(String(inputText)[i] == 6){
+        itemArr[11].querySelector('span').innerHTML += '6'
+      }
+      if(String(inputText)[i] == 7){
+        itemArr[4].querySelector('span').innerHTML += '7'
+      }
+      if(String(inputText)[i] == 8){
+        itemArr[8].querySelector('span').innerHTML += '8'
+      }
+      if(String(inputText)[i] == 9){
+        itemArr[12].querySelector('span').innerHTML += '9'
+      }
+    }
+    itemArr[5].querySelector('span').innerHTML = itemArr[2].querySelector('span').innerHTML.length + itemArr[3].querySelector('span').innerHTML.length + itemArr[4].querySelector('span').innerHTML.length
+    itemArr[9].querySelector('span').innerHTML = itemArr[6].querySelector('span').innerHTML.length + itemArr[7].querySelector('span').innerHTML.length + itemArr[8].querySelector('span').innerHTML.length
+    itemArr[13].querySelector('span').innerHTML = itemArr[10].querySelector('span').innerHTML.length + itemArr[11].querySelector('span').innerHTML.length + itemArr[12].querySelector('span').innerHTML.length
+    itemArr[14].querySelector('span').innerHTML = itemArr[2].querySelector('span').innerHTML.length + itemArr[6].querySelector('span').innerHTML.length + itemArr[10].querySelector('span').innerHTML.length
+    itemArr[15].querySelector('span').innerHTML = itemArr[3].querySelector('span').innerHTML.length + itemArr[7].querySelector('span').innerHTML.length + itemArr[11].querySelector('span').innerHTML.length
+    itemArr[16].querySelector('span').innerHTML = itemArr[4].querySelector('span').innerHTML.length + itemArr[8].querySelector('span').innerHTML.length + itemArr[12].querySelector('span').innerHTML.length
+
+    itemArr[17].querySelector('span').innerHTML = itemArr[2].querySelector('span').innerHTML.length + itemArr[7].querySelector('span').innerHTML.length + itemArr[12].querySelector('span').innerHTML.length
+    itemArr[1].querySelector('span').innerHTML = itemArr[10].querySelector('span').innerHTML.length + itemArr[7].querySelector('span').innerHTML.length + itemArr[4].querySelector('span').innerHTML.length
+
+    
+    for (let i = 0; i < itemArr.length; i++) {
+      if(itemArr[i].querySelector('span').innerHTML == ""){
+        itemArr[i].querySelector('span').innerHTML = "0"
+      }
+    }
+    for (let i = 0; i < document.querySelectorAll('span').length; i++) {
+      if(document.querySelectorAll('span')[i].innerHTML == '0'){
+        document.querySelectorAll('span')[i].innerHTML = '-'
+      }
+    }
+    let destiny = Number(inputText[0])+Number(inputText[1])+Number(inputText[2])+Number(inputText[3])+Number(inputText[4])+Number(inputText[5])+Number(inputText[6])+Number(inputText[7])
+    destiny = num2
+    let res = destiny
+    let number1 = String(destiny)[0]
+    let number2 = String(destiny)[1]
+    if(res == 10){
+      number1 = String(res)[0]
+      number2 = String(res)[1]
+      res = Number(number1)+Number(number2)
+      console.log(res);
+    }
+    if(res > 11){
+      number1 = String(res)[0]
+      number2 = String(res)[1]
+      res = Number(number1)+Number(number2)
+    }
+    itemArr[0].querySelector('span').innerHTML = res
+    if(document.querySelector('.german') != undefined){
+      itemArr[0].querySelectorAll('p')[1].innerHTML = "Geburtsdatum "+inputEl.value
+      itemArr[0].querySelectorAll('p')[2].innerHTML = "Zusatzzahlen "+num1+" "+num2+" "+num3+" "+num4
+      document.querySelector('.summtext').innerHTML = itemArr[2].querySelector('span').innerHTML+"/"+itemArr[6].querySelector('span').innerHTML+"/"+itemArr[10].querySelector('span').innerHTML+"/"+itemArr[3].querySelector('span').innerHTML+"/"+itemArr[7].querySelector('span').innerHTML+"/"+itemArr[11].querySelector('span').innerHTML+"/"+itemArr[4].querySelector('span').innerHTML+"/"+itemArr[8].querySelector('span').innerHTML+"/"+itemArr[12].querySelector('span').innerHTML+"/lz"+itemArr[0].querySelector('span').innerHTML
+    }else{
+      itemArr[0].querySelectorAll('p')[1].innerHTML = "Дата рождения "+inputEl.value
+      itemArr[0].querySelectorAll('p')[2].innerHTML = "Доп числа "+num1+" "+num2+" "+num3+" "+num4
+      document.querySelector('.summtext').innerHTML = itemArr[2].querySelector('span').innerHTML+"/"+itemArr[6].querySelector('span').innerHTML+"/"+itemArr[10].querySelector('span').innerHTML+"/"+itemArr[3].querySelector('span').innerHTML+"/"+itemArr[7].querySelector('span').innerHTML+"/"+itemArr[11].querySelector('span').innerHTML+"/"+itemArr[4].querySelector('span').innerHTML+"/"+itemArr[8].querySelector('span').innerHTML+"/"+itemArr[12].querySelector('span').innerHTML+"/чс"+itemArr[0].querySelector('span').innerHTML
+    }
+    toggleList()
+
+  }
+}
+buttonRepeatEl.onclick = ()=>{
+  toggleList()
+  inputEl.value = ""
+  inputPlaceholder.classList.remove('active')
+}
+const toggleList = ()=>{
+  if(listWrapp.classList.contains('disabled')){
+    listWrapp.classList.remove('disabled')
+    inputWrapp.classList.add('disabled')
+  }else{
+    listWrapp.classList.add('disabled')
+    inputWrapp.classList.remove('disabled')
+  }
+}
+document.querySelector('.summtext').onclick = ()=>{
+  document.querySelector('.copytext').value = document.querySelector('.summtext').innerHTML
+  document.querySelector('.copytext').select()
+  document.execCommand("copy");
+}
+
+
+
+</script>
+<style>
+  * {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  scroll-behavior: smooth;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+body {
+  min-height: 100vh;
+  width: 100vw;
+  background: #F5F5F5;
+  font-family: 'Montserrat';
+  overflow: hidden;
+}
+
+.input {
+  height: 56px;
+  background: rgba(0, 0, 0, 0);
+  border: 1px solid #262B41;
+  border-radius: 4px;
+  padding: 0 24px;
+  color: #262B41;
+  font-size: 28px;
+  font-family: 'Montserrat';
+  margin-bottom: 28px;
+}
+
+.input-wrapp {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.input-wrapp > p {
+  position: absolute;
+  color: #262B41;
+  font-size: 24px;
+  font-family: 'Montserrat';
+  top: 27.5px;
+  left: 24px;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.input-wrapp .active {
+  top: -28px;
+}
+
+.button {
+  height: 56px;
+  background: rgba(0, 0, 0, 0);
+  border: 1px solid #262B41;
+  border-radius: 4px;
+  padding: 0 24px;
+  color: #262B41;
+  font-size: 28px;
+  font-family: 'Montserrat';
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+  display: grid;
+  place-items: center;
+  margin-bottom: 24px;
+}
+
+.button:hover {
+  background: #262B41;
+  color: #F5F5F5;
+}
+
+.main {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.wrapp {
+  width: 700px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 700px;
+}
+
+.list-wrapp {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: 500px;
+  width: 500px;
+}
+
+.list .item {
+  height: 90px;
+  margin: 5px;
+  width: 115px;
+  background: #d1bcbc;
+  border-radius: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.list .item span {
+  font-size: 24px;
+}
+
+.list .item:first-child {
+  width: 365px;
+}
+
+.summtext {
+  font-size: 22px;
+  margin-top: 16px;
+  cursor: pointer;
+}
+
+.copytext {
+  position: absolute;
+  top: -999999px;
+}
+
+.disabled {
+  display: none;
+}
+
+@media (min-width: 500px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 100px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #8a8a8a;
+    background-clip: content-box;
+    border: 3px solid rgba(0, 0, 0, 0);
+    border-radius: 100px;
+  }
+
+  ::-webkit-scrollbar-track-piece {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  ::-webkit-scrollbar-button {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+@media (max-width: 500px) {
+  .list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    height: 95vw;
+    width: 95vw;
+  }
+
+  .list .item {
+    height: calc((95vw / 5) - 2px * 2);
+    margin: 2px;
+    width: calc((95vw / 4) - 2px * 2);
+  }
+
+  .list .item span {
+    font-size: 24px;
+  }
+
+  .list .item > p {
+    width: calc((95vw / 4) - 2px * 2);
+    padding: 0 5px;
+    text-align: center;
+    font-size: 10px;
+  }
+
+  .list .item:first-child {
+    width: calc((95vw / 4 * 3) - 2px * 2);
+  }
+
+  .list .item:first-child p {
+    width: calc((95vw / 4 * 3) - 2px * 2);
+    word-break: break-all;
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  .main .wrapp {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .summtext {
+    padding: 0 24px;
+    font-size: 18px;
+  }
+
+  .input {
+    height: 56px;
+    padding: 0 48px;
+    font-size: 18px;
+    margin-bottom: 28px;
+  }
+
+  .button {
+    height: 56px;
+    padding: 0 24px;
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+  .input-wrapp > p {
+    font-size: 18px;
+    top: 27.5px;
+    left: 24px;
+  }
+
+  .input-wrapp .active {
+    top: -28px;
+  }
+}
+</style>
